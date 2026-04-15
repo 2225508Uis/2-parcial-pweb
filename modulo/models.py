@@ -1,7 +1,7 @@
 from django.db import models
 
 # Create your models here.
-class Distros(models.Model):
+class Distro(models.Model):
     # Campos de texto y contenido
     name = models.CharField(max_length=200)
     description = models.TextField()

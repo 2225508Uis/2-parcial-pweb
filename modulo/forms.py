@@ -1,7 +1,7 @@
 from django.forms import ModelForm
-from .models import Distros
+from .models import Distro
 
 class TaskForm(ModelForm):
   class Meta:
-    model = Distros
+    model = Distro
     fields = '__all__'
