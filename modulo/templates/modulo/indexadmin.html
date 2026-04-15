@@ -1,0 +1,44 @@
+{% load static %}
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Panel Admin - MPA Django</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="{% static 'modulo/css/indexadmin.css' %}" />
+
+  </head>
+  <body>
+    <!-- Encabezado y navegación -->
+    <header>
+      <nav>
+        <div class="brand">
+          MPA Django
+          <span class="admin-badge">Admin</span>
+        </div>
+        <div class="nav-links">
+          <span style="color: white; margin-right: 20px"
+            >Bienvenido, {{ user.username }}</span
+          >
+          <a href="{% url 'logout' %}">Cerrar Sesión</a>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Contenido principal -->
+    <main>
+      <div class="welcome-message">
+        <h2>Bienvenido al Panel de Administración</h2>
+        <p>
+          Has iniciado sesión correctamente como
+          <strong>{{ user.get_full_name|default:user.username }}</strong>
+        </p>
+      </div>
+    </main>
+
+    <!-- Pie de página opcional -->
+    <footer>
+      &copy; 2025 Proyecto Académico Django. Todos los derechos reservados.
+    </footer>
+  </body>
+</html>

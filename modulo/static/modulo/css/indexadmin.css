@@ -1,0 +1,81 @@
+/* Estilos generales con Flexbox para diseño de altura completa */
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+header {
+    background-color: #333;
+    color: #f2f2f2;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 20px;
+}
+
+.brand {
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+.nav-links a {
+    margin-left: 20px;
+    color: #f2f2f2;
+    text-decoration: none;
+}
+
+.nav-links a:hover {
+    text-decoration: underline;
+}
+
+main {
+    flex: 1;
+    padding: 20px;
+}
+
+footer {
+    background-color: #f4f4f4;
+    text-align: center;
+    padding: 10px;
+    font-size: 0.9em;
+    color: #555;
+}
+
+.admin-badge {
+    background-color: #27ae60;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 12px;
+    margin-left: 10px;
+}
+
+.welcome-message {
+    background-color: #ecf0f1;
+    padding: 20px;
+    border-left: 4px solid #3498db;
+    margin: 20px auto;
+    max-width: 800px;
+    border-radius: 5px;
+}
+
+.welcome-message h2 {
+    color: #2c3e50;
+    margin-bottom: 10px;
+}
+
+.welcome-message p {
+    color: #34495e;
+    line-height: 1.6;
+}
