@@ -41,7 +41,57 @@ nav {
 
 main {
     flex: 1;
-    padding: 20px;
+    padding: 15px;
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    align-content: flex-start;
+}
+
+.distro-card {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    border-left: 4px solid #333;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: auto;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.distro-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.distro-card h3 {
+    color: #333;
+    margin-top: 0;
+    margin-bottom: 8px;
+    font-size: 1.1em;
+}
+
+.distro-card p {
+    color: #666;
+    line-height: 1.4;
+    margin: 6px 0;
+    font-size: 0.95em;
+}
+
+.distro-card img {
+    border-radius: 6px;
+    margin: 8px 0;
+    max-width: 100%;
+    height: auto;
+    border: 1px solid #ddd;
+}
+
+.created-at {
+    display: block;
+    color: #999;
+    font-size: 0.8em;
+    margin-top: 8px;
 }
 
 footer {

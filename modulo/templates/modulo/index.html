@@ -1,33 +1,64 @@
 {% load static %}
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Proyecto MPA Django</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="{% static 'modulo/css/index.css' %}">
-</head>
-<body>
-
-<!-- Encabezado y navegación -->
-<header>
-    <nav>
-        <div class="brand">MPA Django</div>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Wiki Distros Linux</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="{% static 'modulo/css/index.css' %}" />
+  </head>
+  <body>
+    <!-- Encabezado y navegación -->
+    <header>
+      <nav>
+        <div class="brand">Wiki Distros Linux</div>
         <div class="nav-links">
-            <a href="{% url 'login' %}">Login</a>
+          <a href="{% url 'login' %}">Login</a>
         </div>
-    </nav>
-</header>
+      </nav>
+    </header>
 
-<!-- Contenido principal -->
-<main>
-    
-</main>
+    <!-- Contenido principal -->
+    <main>
+      {% for distro in distros %}
+      <div class="distro-card">
+        <h3>Nombre: {{ distro.name }}</h3>
+        <p>Descripción: {{ distro.description }}</p>
+        <span class="created-at"
+          >Creado el {{ distro.created_at|date:"d M Y H:i" }}</span
+        >
+        <div>
+          {% if distro.imagen %}
+          <img
+            src="{{ distro.imagen.url }}"
+            width="100px"
+            height="100px"
+            alt="{{ distro.name }}-imagen"
+          />
+          {% else %}
+            <p style="color: #999">Sin imagen</p>
+          {% endif %}
+        </div>
 
-<!-- Pie de página opcional -->
-<footer>
-    &copy; 2025 Proyecto Académico Django. Todos los derechos reservados.
-</footer>
+        <p>
+            {% if distro.rolling_release %}
+                rolling release: {{ emoji_done }}
+            {% else %}
+                rolling release: {{ emoji_pending }}
+            {% endif %}
+        </p>
 
-</body>
+        <p>
+            ultima version estable: {{ distro.last_build_stable }}
+        </p>
+
+      </div>
+      {% endfor %}
+    </main>
+
+    <!-- Pie de página opcional -->
+    <footer>
+      &copy; 2025 Proyecto Académico Django. Todos los derechos reservados.
+    </footer>
+  </body>
 </html>

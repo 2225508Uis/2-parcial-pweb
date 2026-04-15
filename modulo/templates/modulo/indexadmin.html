@@ -6,14 +6,13 @@
     <title>Panel Admin - MPA Django</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="{% static 'modulo/css/indexadmin.css' %}" />
-
   </head>
   <body>
     <!-- Encabezado y navegación -->
     <header>
       <nav>
         <div class="brand">
-          MPA Django
+          Wiki Distros Linux
           <span class="admin-badge">Admin</span>
         </div>
         <div class="nav-links">
@@ -27,13 +26,40 @@
 
     <!-- Contenido principal -->
     <main>
-      <div class="welcome-message">
-        <h2>Bienvenido al Panel de Administración</h2>
+      {% for distro in distros %}
+      <div class="distro-card">
+        <h3>Nombre: {{ distro.name }}</h3>
+        <p>Descripción: {{ distro.description }}</p>
+        <span class="created-at"
+          >Creado el {{ distro.created_at|date:"d M Y H:i" }}</span
+        >
+        <div>
+          {% if distro.imagen %}
+          <img
+            src="{{ distro.imagen.url }}"
+            width="100px"
+            height="100px"
+            alt="{{ distro.name }}-imagen"
+          />
+          {% else %}
+            <p style="color: #999">Sin imagen</p>
+          {% endif %}
+        </div>
+
         <p>
-          Has iniciado sesión correctamente como
-          <strong>{{ user.get_full_name|default:user.username }}</strong>
+            {% if distro.rolling_release %}
+                rolling release: {{ emoji_done }}
+            {% else %}
+                rolling release: {{ emoji_pending }}
+            {% endif %}
         </p>
+
+        <p>
+            ultima version estable: {{ distro.last_build_stable }}
+        </p>
+
       </div>
+      {% endfor %}
     </main>
 
     <!-- Pie de página opcional -->
