@@ -9,12 +9,17 @@ from .forms import DistroForm
 def index_view(request, ord):
     """wiki"""
     if ord == 1:
-        distros = Distro.objects.all().order_by('created_at')
+        ordenp ='-created_at'
         orden = 'Ascendente'
 
     else:
-        distros = Distro.objects.all().order_by('-created_at')
+        ordenp = '-created_at'
         orden = 'Descendente'
+    if not request.user.is_authenticated:
+        distros = Distro.objects.filter(active=True).order_by(ordenp)
+    else:
+        distros = Distro.objects.all().order_by(ordenp)
+
 
     context = {
         'distros': distros,

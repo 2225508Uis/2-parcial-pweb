@@ -23,7 +23,11 @@
           <span style="color: white; margin-right: 20px"
             >Bienvenido, {{ user.username }}</span
           >
-          <a href="{% url 'logout' %}">Cerrar Sesión</a>
+
+          {% if admin %}
+            <a href="{% url 'logout' %}">Cerrar Sesión</a>
+          {% endif %}
+
         </div>
       </nav>
     </header>
@@ -72,8 +76,12 @@
         </p>
 
         <a href="{% url 'index' ord=0 %}">← Volver atrás</a>
-        <a href="{% url 'update' id=distro.id %}">Actualizar</a>
-        <a href="{% url 'delete' id=distro.id %}">Eliminar</a>
+
+        {% if admin %}
+          <a href="{% url 'update' id=distro.id %}">Actualizar</a>
+          <a href="{% url 'delete' id=distro.id %}">Eliminar</a>
+        {% endif %}
+
 
       </div>
 

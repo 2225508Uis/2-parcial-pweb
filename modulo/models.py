@@ -2,12 +2,13 @@ from django.db import models
 
 # Create your models here.
 class Distro(models.Model):
-    # Campos de texto y contenido
-    name = models.CharField(max_length=200)
-    description = models.TextField()
 
     # registro activo o no
     active = models.BooleanField(default=True)
+
+    # Campos de texto y contenido
+    name = models.CharField(max_length=200)
+    description = models.TextField()
 
     # Metadatos automáticos
     created_at = models.DateTimeField(auto_now_add=True)
