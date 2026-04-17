@@ -32,6 +32,15 @@
     <main>
       {% for distro in distros %}
       <div class="distro-card" data-url="{% url 'descripcion' id=distro.id %}">
+
+        <p>
+            {% if distro.active %}
+                Activa: {{ emoji_done }}
+            {% else %}
+                Activa: {{ emoji_pending }}
+            {% endif %}
+        </p>
+
         <h3>Nombre: {{ distro.name }}</h3>
         <p>Click para ver descripcion</p>
         <p>/acciones</p>

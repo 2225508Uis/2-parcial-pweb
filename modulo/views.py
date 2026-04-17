@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from .models import Distro
-from .forms import TaskForm
+from .forms import DistroForm
 
 
 # Create your views here.
@@ -55,19 +55,33 @@ def descripcion_view(request, id):
     """descripcion de la distro"""
     distro = Distro.objects.get(id=id)
     if request.user.is_authenticated:
-        return render(request, 'modulo/descripcion.html', {'distro': distro, 'admin': True})
+        return render(request, 'modulo/descripcion.html', {'distro': distro, 'admin': True,'emoji_done': '✅', 'emoji_pending': '⛔',})
     return render(request, 'modulo/descripcion.html', {'distro': distro, 'admin': False})
 
 @login_required
 def create(request):
     """crear distro"""
     if request.method == 'POST':
-        form = TaskForm(request.POST, request.FILES)
+        form = DistroForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             return redirect('index', ord=0)
     else:
-        form = TaskForm()
+        form = DistroForm()
     return render(request, 'modulo/create.html', {'form': form, 'creando': True})
 
-
+@login_required
+def update(request, id):
+    """actualizar distro"""
+    distro = Distro.objects.get(id=id)
+    form = DistroForm(request.POST or None, request.FILES or None, instance=distro)
+    if form.is_valid():
+        form.save()
+        return redirect('index', ord=0)
+    return render(request, 'modulo/create.html', {'form': form, 'creando': False})
+@login_required
+def delete(request, id):
+    """eliminar distro"""
+    distro = Distro.objects.get(id=id)
+    distro.delete()
+    return redirect('index', ord=0)

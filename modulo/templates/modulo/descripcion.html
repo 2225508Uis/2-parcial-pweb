@@ -32,6 +32,15 @@
     <main>
 
       <div class="distro-card" data-url="{% url 'descripcion' id=distro.id %}">
+
+        <p>
+            {% if distro.active %}
+                Activa: {{ emoji_done }}
+            {% else %}
+                Activa: {{ emoji_pending }}
+            {% endif %}
+        </p>
+
         <h3>Nombre: {{ distro.name }}</h3>
         <p id="descripcion">Descripcion: {{ distro.description }}</p>
         <span class="created-at"
@@ -62,7 +71,9 @@
             ultima version estable: {{ distro.last_build_stable }}
         </p>
 
-        >
+        <a href="{% url 'index' ord=0 %}">← Volver atrás</a>
+        <a href="{% url 'update' id=distro.id %}">Actualizar</a>
+        <a href="{% url 'delete' id=distro.id %}">Eliminar</a>
 
       </div>
 
