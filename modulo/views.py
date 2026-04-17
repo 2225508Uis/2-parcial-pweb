@@ -65,7 +65,7 @@ def descripcion_view(request, id):
 
 @login_required
 def create(request):
-    """crear distro"""
+    """crear distro""" 
     if request.method == 'POST':
         form = DistroForm(request.POST, request.FILES)
         if form.is_valid():

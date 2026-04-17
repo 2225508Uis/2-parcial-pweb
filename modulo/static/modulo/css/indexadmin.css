@@ -42,7 +42,7 @@ nav {
 main {
     flex: 1;
     padding: 15px;
-    display: inline-flex;
+    display: flex;
     flex-wrap: wrap;
     gap: 15px;
     align-content: flex-start;
@@ -91,9 +91,7 @@ footer {
     padding: 15px;
     border-left: 4px solid #3498db;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    width: auto;
-    display: inline-block;
-    vertical-align: top;
+    flex: 0 0 calc((100% - 90px) / 7);
 }
 
 .distro-card:hover {
