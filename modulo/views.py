@@ -6,7 +6,8 @@ from .forms import TaskForm
 
 
 # Create your views here.
-def index(request):
+def index_view(request):
+    """wiki sin login"""
     distros = Distro.objects.all().order_by('-created_at')
     context = {
         'distros': distros,
@@ -20,6 +21,7 @@ def index(request):
         return render(request, 'modulo/index.html', context)
 
 def login_view(request):
+    """login"""
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
