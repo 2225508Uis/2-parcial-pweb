@@ -12,6 +12,9 @@
     <header>
       <nav>
         <div class="brand">Wiki Distros Linux</div>
+        <a href="{% url 'index' ord=1 %}">Fecha de creacion asc</a>
+        <a href="{% url 'index' ord=0 %}">Fecha de creacion dsc</a>
+        <p>Orden: {{ orden }}</p>
         <div class="nav-links">
           <a href="{% url 'login' %}">Login</a>
         </div>
@@ -21,13 +24,12 @@
     <!-- Contenido principal -->
     <main>
       {% for distro in distros %}
-      <div class="distro-card">
+      <div class="distro-card" data-url="{% url 'descripcion' id=distro.id %}">
         <h3>Nombre: {{ distro.name }}</h3>
-        <p>Descripción: {{ distro.description }}</p>
+        <p>Click para ver descripcion</p>
         <span class="created-at"
           >Creado el {{ distro.created_at|date:"d M Y H:i" }}</span
         >
-        
         <div>
           {% if distro.imagen %}
           <img
@@ -61,5 +63,19 @@
     <footer>
       &copy; 2025 Proyecto Académico Django. Todos los derechos reservados.
     </footer>
+    <script>
+    // Buscamos todas las tarjetas
+    const tarjetas = document.querySelectorAll('.distro-card');
+
+    tarjetas.forEach(tarjeta => {
+        tarjeta.addEventListener('click', function() {
+            // Extraemos la URL que Django puso en el data-url
+            const urlDestino = this.getAttribute('data-url');
+
+            // Redirigimos
+            window.location.href = urlDestino;
+        });
+    });
+    </script>
   </body>
 </html>

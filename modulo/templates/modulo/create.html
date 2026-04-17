@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crear/Editar Distro</title>
+  <link rel="stylesheet" href="{% static 'modulo/css/create.css' %}">
+</head>
+<body>
+  <header>
+    <nav>
+      <div class="brand">Wiki Distros Linux</div>
+      <div class="nav-links">
+        <a href="{% url 'logout' %}">Cerrar Sesión</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <div class="form-container">
+      {% if creando %}
+        <h1>Crear Nueva Distro</h1>
+      {% else %}
+        <h1>Editar Distro</h1>
+      {% endif %}
+
+      <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Guardar">
+      </form>
+    </div>
+  </main>
+
+  <footer>
+    &copy; 2025 Proyecto Académico Django. Todos los derechos reservados.
+  </footer>
+</body>
+</html>

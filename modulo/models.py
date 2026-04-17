@@ -6,14 +6,19 @@ class Distro(models.Model):
     name = models.CharField(max_length=200)
     description = models.TextField()
 
+    # registro activo o no
+    active = models.BooleanField(default=True)
+
     # Metadatos automáticos
     created_at = models.DateTimeField(auto_now_add=True)
 
     # Gestión de archivos (requiere Pillow instalado)
     imagen = models.ImageField(upload_to='distros/', null=True, blank=True)
 
-    # Lógica de la distribución
+    # la distro rollin release o no
     rolling_release = models.BooleanField(default=False)
+
+    # ultima vercion estable
     last_build_stable = models.CharField(max_length=200, null=True, blank=True)
 
     def __str__(self):

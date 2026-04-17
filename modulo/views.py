@@ -6,13 +6,22 @@ from .forms import TaskForm
 
 
 # Create your views here.
-def index_view(request):
-    """wiki sin login"""
-    distros = Distro.objects.all().order_by('-created_at')
+def index_view(request, ord):
+    """wiki"""
+    if ord == 1:
+        distros = Distro.objects.all().order_by('created_at')
+        orden = 'Ascendente'
+
+    else:
+        distros = Distro.objects.all().order_by('-created_at')
+        orden = 'Descendente'
+
     context = {
         'distros': distros,
         'emoji_done': '✅',
-        'emoji_pending': '⛔'
+        'emoji_pending': '⛔',
+        'orden': orden,
+
     }
 
     if request.user.is_authenticated:
@@ -30,7 +39,7 @@ def login_view(request):
 
         if user is not None:
             login(request, user)
-            return redirect('index')
+            return redirect('index', ord=0)
         else:
             return render(request, 'modulo/login.html', {
                 'error': 'Usuario o contraseña incorrectos'
@@ -40,4 +49,25 @@ def login_view(request):
 
 def logout_view(request):
     logout(request)
-    return redirect('index')
+    return redirect('index', ord=0)
+
+def descripcion_view(request, id):
+    """descripcion de la distro"""
+    distro = Distro.objects.get(id=id)
+    if request.user.is_authenticated:
+        return render(request, 'modulo/descripcion.html', {'distro': distro, 'admin': True})
+    return render(request, 'modulo/descripcion.html', {'distro': distro, 'admin': False})
+
+@login_required
+def create(request):
+    """crear distro"""
+    if request.method == 'POST':
+        form = TaskForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('index', ord=0)
+    else:
+        form = TaskForm()
+    return render(request, 'modulo/create.html', {'form': form, 'creando': True})
+
+
