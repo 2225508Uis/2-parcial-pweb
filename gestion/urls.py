@@ -23,7 +23,7 @@ from django.shortcuts import redirect
 urlpatterns = [
     path('', lambda request: redirect('wiki/0')),
     path('wiki/', include('modulo.urls')),
-    path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls,name='adminpanel'),
 ]
 
 # Servir archivos media en desarrollo

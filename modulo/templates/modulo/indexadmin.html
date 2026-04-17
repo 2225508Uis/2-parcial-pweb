@@ -11,15 +11,15 @@
     <!-- Encabezado y navegación -->
     <header>
       <nav>
-        <div class="brand">
-          Wiki Distros Linux
-          <span class="admin-badge">Admin</span>
+        <div id="brand" data-url="{% url 'index' ord=0 %}">Wiki Distros Linux
+            <span class="admin-badge">Admin</span>
         </div>
         <a href="{% url 'index' ord=1 %}">Fecha de creacion asc</a>
         <a href="{% url 'index' ord=0 %}">Fecha de creacion dsc</a>
         <p>Orden: {{ orden }}</p>
         <a href="{% url 'create' %}">Crear nueva distro</a>
         <div class="nav-links">
+            
           <span style="color: white; margin-right: 20px"
             >Bienvenido, {{ user.username }}</span
           >
@@ -92,6 +92,15 @@
             // Redirigimos
             window.location.href = urlDestino;
         });
+    });
+
+    const logo_wiki = document.getElementById('brand');
+
+    logo_wiki.addEventListener('click', function() {
+
+        const urlDestino = this.getAttribute('data-url');
+
+        window.location.href = urlDestino;
     });
     </script>
   </body>

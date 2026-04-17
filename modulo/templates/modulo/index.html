@@ -11,7 +11,7 @@
     <!-- Encabezado y navegación -->
     <header>
       <nav>
-        <div class="brand">Wiki Distros Linux</div>
+        <div id="brand" data-url="{% url 'index' ord=0 %}">Wiki Distros Linux</div>
         <a href="{% url 'index' ord=1 %}">Fecha de creacion asc</a>
         <a href="{% url 'index' ord=0 %}">Fecha de creacion dsc</a>
         <p>Orden: {{ orden }}</p>
@@ -69,13 +69,23 @@
 
     tarjetas.forEach(tarjeta => {
         tarjeta.addEventListener('click', function() {
-            // Extraemos la URL que Django puso en el data-url
+
             const urlDestino = this.getAttribute('data-url');
 
-            // Redirigimos
+
             window.location.href = urlDestino;
         });
     });
+
+    const logo_wiki = document.getElementById('brand');
+
+    logo_wiki.addEventListener('click', function() {
+
+        const urlDestino = this.getAttribute('data-url');
+
+        window.location.href = urlDestino;
+    });
+
     </script>
   </body>
 </html>

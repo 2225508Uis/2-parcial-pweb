@@ -10,7 +10,12 @@
 <body>
   <header>
     <nav>
-      <div class="brand">Wiki Distros Linux</div>
+      <div id="brand" data-url="{% url 'index' ord=0 %}">
+            Wiki Distros Linux
+          {% if admin %}
+            <span class="admin-badge">Admin</span>
+          {% endif %}
+          </div>
       <div class="nav-links">
         <a href="{% url 'logout' %}">Cerrar Sesión</a>
       </div>
@@ -36,5 +41,15 @@
   <footer>
     &copy; 2025 Proyecto Académico Django. Todos los derechos reservados.
   </footer>
+  <script>
+      const logo_wiki = document.getElementById('brand');
+
+      logo_wiki.addEventListener('click', function() {
+
+        const urlDestino = this.getAttribute('data-url');
+
+        window.location.href = urlDestino;
+    });
+    </script>
 </body>
 </html>
