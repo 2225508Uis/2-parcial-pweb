@@ -70,7 +70,7 @@ def create(request):
         form = DistroForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return redirect('index', ord=0)
+            return redirect('create')
     else:
         form = DistroForm()
     return render(request, 'modulo/create.html', {'form': form, 'creando': True})
